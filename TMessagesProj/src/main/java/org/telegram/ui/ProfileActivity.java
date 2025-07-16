@@ -5671,7 +5671,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         checkPhotoDescriptionAlpha();
         avatarContainer.setScaleX(avatarScale);
         avatarContainer.setScaleY(avatarScale);
-        avatarContainer.setX(avatarX);
+        avatarContainer.setTranslationX(AndroidUtilities.lerp(avatarX, 0f, value));
         avatarContainer.setTranslationY(AndroidUtilities.lerp((float) Math.ceil(avatarY), 0f, value));
         avatarImage.setRoundRadius((int) AndroidUtilities.lerp(getSmallAvatarRoundRadius(), 0f, value));
         if (storyView != null) {
@@ -7357,6 +7357,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             if (h > AndroidUtilities.dp(DEFAULT_HEADER_HEIGHT) || isPulledDown) {
                 expandProgress = Math.max(0f, Math.min(1f, (h - AndroidUtilities.dp(DEFAULT_HEADER_HEIGHT)) / (listView.getMeasuredWidth() - newTop - AndroidUtilities.dp(DEFAULT_HEADER_HEIGHT))));
                 avatarScale = AndroidUtilities.lerp((DEAFULT_AVATAR_LENGHT + 18f) / DEAFULT_AVATAR_LENGHT, (DEAFULT_AVATAR_LENGHT + DEAFULT_AVATAR_LENGHT + 18f) / DEAFULT_AVATAR_LENGHT, Math.min(1f, expandProgress * 3f));
+                //avatarScale = AndroidUtilities.lerp((DEAFULT_AVATAR_LENGHT + 18f) / DEAFULT_AVATAR_LENGHT, (DEAFULT_AVATAR_LENGHT + DEAFULT_AVATAR_LENGHT + 18f) / DEAFULT_AVATAR_LENGHT, Math.min(1f, expandProgress * 3f));
+
+
                 if (storyView != null) {
                     storyView.invalidate();
                 }
@@ -7548,7 +7551,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
                 avatarImage.setRoundRadius((int) AndroidUtilities.lerp(getSmallAvatarRoundRadius(), 0f, avatarAnimationProgress));
                 //avatarContainer.setTranslationX(AndroidUtilities.lerp(avX, 0, avatarAnimationProgress));
-                //avatarContainer.setTranslationX(AndroidUtilities.lerp(avX, avX, avatarAnimationProgress));
+                avatarContainer.setTranslationX(AndroidUtilities.lerp(avX, avX, avatarAnimationProgress));
                 avatarContainer.setTranslationY(AndroidUtilities.lerp((float) Math.ceil(avY), 0f, avatarAnimationProgress));
                 float extra = (avatarContainer.getMeasuredWidth() - AndroidUtilities.dp(DEAFULT_AVATAR_LENGHT)) * avatarScale;
                 timeItem.setTranslationX(avatarContainer.getX() + AndroidUtilities.dp(16) + extra);
